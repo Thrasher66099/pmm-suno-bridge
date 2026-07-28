@@ -212,6 +212,16 @@ class SunoApi {
   }
 
   /**
+   * Public read-only probe of Suno's captcha requirement. Costs no credits and
+   * launches no browser — lets callers check whether generation is currently
+   * possible before spending anything on a real attempt.
+   */
+  public async isCaptchaRequired(): Promise<boolean> {
+    await this.keepAlive();
+    return this.captchaRequired();
+  }
+
+  /**
    * Clicks on a locator or XY vector. This method is made because of the difference between ghost-cursor-playwright and Playwright methods
    */
   private async click(target: Locator|Page, position?: { x: number, y: number }): Promise<void> {
